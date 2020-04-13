@@ -47,7 +47,7 @@ def basic():
     return '성공'
 
 
-@app.route('/create_1_0', methods=['POST'])
+@app.route('/create_1_0', methods=['GET', 'POST'])
 def create_game_table():
     global g_title_index
     text = request.form['text']
@@ -68,7 +68,7 @@ def create_game_table():
 
 
 # 대진표 초기화(경기 결과 삭제 + 대진표 수정)
-@app.route('/reset_1_0', methods=['POST'])
+@app.route('/reset_1_0', methods=['GET', 'POST'])
 def reset_game_table():
     text = request.form['text']
     game_table = request.form['game_table']
@@ -78,7 +78,7 @@ def reset_game_table():
 
 
 # 대진표 초기화(경기 결과 삭제)
-@app.route('/disabled_1_0', methods=['POST'])
+@app.route('/disabled_1_0', methods=['GET', 'POST'])
 def locked_game_table():
     game_table = request.form['game_table']
 
@@ -87,7 +87,7 @@ def locked_game_table():
     return 'true'
 
 
-@app.route('/enter_1_0', methods=['POST'])
+@app.route('/enter_1_0', methods=['GET', 'POST'])
 def enter_to_game_table():
     filename = request.form['game_table']
 
@@ -97,7 +97,7 @@ def enter_to_game_table():
     return read_file(g_save_path + filename)
 
 
-@app.route('/add_game_result_1_0', methods=['POST'])
+@app.route('/add_game_result_1_0', methods=['GET', 'POST'])
 def add_game_result():
     game_table_name = request.form['game_table']
     groupIndex = request.form['group_index']
@@ -116,7 +116,7 @@ def add_game_result():
     return 'false'
 
 
-@app.route('/register_1_0', methods=['POST'])
+@app.route('/register_1_0', methods=['GET', 'POST'])
 def register():
     id = request.form['id']
     pw = request.form['pw']
@@ -139,7 +139,7 @@ def register():
     return 'register_success'
 
 
-@app.route('/login_event_1_0', methods=['POST'])
+@app.route('/login_event_1_0', methods=['GET', 'POST'])
 def login():
     id = request.form['id']
     pw = request.form['pw']
@@ -157,12 +157,12 @@ def login():
     return 'login_fail'
 
 
-@app.route('/latest_version_1_0', methods=['POST'])
+@app.route('/latest_version_1_0', methods=['GET', 'POST'])
 def latest_version():
     return '1.0'
 
 
-@app.route('/store_link_1_0', methods=['POST'])
+@app.route('/store_link_1_0', methods=['GET', 'POST'])
 def store_link():
     device = request.form['device']     # iphone/android
     return 'com.flutter.gender.separation' if device == 'android' else 'com.flutter.gender.separation'
@@ -233,7 +233,7 @@ def initialize():
 
 
 # ----------------------------------------------- #
-default_path = 'C:/Users/trees/PycharmProjects/Flask-server1/'
+default_path = '/var/www/Flask-server1/'
 g_save_path = default_path + 'rooms/'
 g_keyword_path = default_path + 'party_names/title.txt'
 g_info_path = default_path + 'accounts/info.txt'
